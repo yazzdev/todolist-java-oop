@@ -1,12 +1,12 @@
 package entity;
 
-public class Todo {
+public class Todolist {
   private String todo;
 
-  public Todo() {
+  public Todolist() {
   }
 
-  public Todo(String todo) {
+  public Todolist(String todo) {
     this.todo = todo;
   }
 
