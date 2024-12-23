@@ -18,18 +18,21 @@ public class TodoListServiceImpl implements TodoListService {
     System.out.println("----------------");
     System.out.println(">>> TODOLIST <<<");
     for (var i = 0; i < model.length; i++) {
-      var todoList = model[i];
+      var todolist = model[i];
       var no = i + 1;
 
-      if (todoList != null) {
-        System.out.println(no + ". " + todoList.getTodo());
+      if (todolist != null) {
+        System.out.println(no + ". " + todolist.getTodo());
       }
     }
   }
 
   @Override
   public void addTodoList(String todo) {
+    Todolist todolist = new Todolist(todo);
+    todoListRepository.add(todolist);
 
+    System.out.println("Sukses Menambah Todo : " + todo);
   }
 
   @Override
