@@ -6,6 +6,6 @@ public interface TodoListService {
 
   void addTodoList(String todo);
 
-  void removeTodoList(String number);
+  void removeTodoList(Integer number);
 
 }
