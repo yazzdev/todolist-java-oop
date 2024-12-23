@@ -1,4 +1,4 @@
-public class AplikasiTodolist {
+public class AppTodoListDasar {
 
   public static String[] model = new String[10];
 
