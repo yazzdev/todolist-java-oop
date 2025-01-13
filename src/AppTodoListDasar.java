@@ -117,6 +117,35 @@ public class AppTodoListDasar {
     showTodoList();
   }
 
+  // Mengupdate todo dari list
+  public static boolean updateTodoList(Integer number, String newTodo) {
+    if ((number - 1) >= model.length || model[number - 1] == null) {
+      return false; // Data tidak ditemukan
+    } else {
+      model[number - 1] = newTodo; // Update data
+      return true;
+    }
+  }
+
+  public static void testUpdateTodoList() {
+    addTodoList("satu");
+    addTodoList("dua");
+    addTodoList("tiga");
+
+    System.out.println("Data Awal");
+    showTodoList();
+
+    boolean success = updateTodoList(2, "dua (updated)");
+    System.out.println("Update berhasil? " + success);
+
+    System.out.println("Data Setelah Update");
+    showTodoList();
+
+    // Testing update dengan indeks yang tidak valid
+    success = updateTodoList(10, "tidak ada");
+    System.out.println("Update dengan indeks tidak valid? " + success);
+  }
+
   // Input
   public static String input(String info) {
     System.out.print(info + " : ");
@@ -143,7 +172,8 @@ public class AppTodoListDasar {
 
       System.out.println("Menu");
       System.out.println("1. Tambah");
-      System.out.println("2. Hapus");
+      System.out.println("2. Update");
+      System.out.println("3. Hapus");
       System.out.println("x. Keluar");
 
       var input = input("Pilih");
@@ -151,6 +181,8 @@ public class AppTodoListDasar {
       if (input.equals("1")) {
         viewAddTodoList();
       } else if (input.equals("2")) {
+        viewUpdateTodoList();
+      } else if (input.equals("3")) {
         viewRemoveTodoList();
       } else if (input.equals("x")) {
         break;
@@ -216,6 +248,45 @@ public class AppTodoListDasar {
     showTodoList();
 
     viewRemoveTodoList();
+
+    showTodoList();
+  }
+
+  // View mengupdate todo dari list
+  public static void viewUpdateTodoList() {
+    System.out.println(">> UPDATE TODO <<");
+
+    var number = input("Todo (x for cancel)");
+    if (number.equals("x")) {
+      return; // batal
+    }
+
+    // Validasi nomor sebelum meminta Todo baru
+    boolean isValidNumber = (Integer.parseInt(number) - 1) < model.length && model[Integer.parseInt(number) - 1] != null;
+
+    if (!isValidNumber) {
+      System.out.println("Gagal mengupdate todolist: " + number);
+      return; // Langsung keluar jika nomor tidak valid
+    }
+
+    var newTodo = input("Todo baru");
+    boolean success = updateTodoList(Integer.valueOf(number), newTodo);
+
+    if (success) {
+      System.out.println("Todo berhasil diupdate!");
+    } else {
+      System.out.println("Gagal mengupdate todolist: " + number);
+    }
+  }
+
+  public static void testViewUpdateTodoList() {
+    addTodoList("satu");
+    addTodoList("dua");
+    addTodoList("tiga");
+
+    showTodoList();
+
+    viewUpdateTodoList();
 
     showTodoList();
   }
